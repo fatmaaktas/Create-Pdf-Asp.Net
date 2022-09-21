@@ -1,0 +1,54 @@
+﻿@model Pdf.Models._site
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="content-wrapper">
+    <section class="content">
+        <div class="container">
+            <div class="row">
+                <div class="box-body p-15">
+                    <div class="table-responsive">
+                        <div class="canvas_div_pdf" style="display: block;">
+                            <table id="tickets" class="table mt-0 table-hover no-wrap table-bordered" data-page-size="10">
+                                <thead>
+                                    <tr>
+                                        <th>Sigorta Şirket <br /> Hasar Dosya No</th>
+                                        <th>Sigortalı Adı <br /> Rapor No</th>
+                                        <th>İhbar Tarihi <br /> Hasar Tarihi</th>
+                                        <th>Ekspertiz Yeri <br /> Ekspertiz Tarihi</th>
+                                        <th>Eksper Adı <br /> Raportor</th>
+                                        <th>Açık Süre <br /> Dosya Durumu</th>
+                                        <th>Hasar</th>
+                                        <th>EV</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.m_yeni_dosyas)
+                                    {
+                                        <tr>
+                                            <td>@item.sigorta_sirketi <br /> @item.dosya_no</td>
+                                            <td>
+                                                <a>@item.sigortali_adi <br /> @item.yeni_dosya_id</a>
+                                            </td>
+                                            <td>@item.ihbar_tar <br /> @item.hasar_tar</td>
+                                            <td>@item.ihbar_tar <br /> @item.ekspertiz_tar</td>
+                                            <td>@item.eksper_firma <br /> @item.aktif </td>
+                                            @*<td><span class="badge badge-warning">@item.ihbar_tar</span></td>*@
+                                            <td>@item.s_tahmini_hasar</td>
+                                            <td>
+                                                <button type="button" class="btn btn-icon-circle btn-danger" data-toggle="tooltip" data-original-title="Delete"><i class="ti-trash" aria-hidden="true"></i></button>
+                                                <a href="@Url.Action("PdfDonustur", new { id = item.yeni_dosya_id})" target="_blank">PDF<i class="mdi-file-pdf" aria-hidden="true"></i></a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
